@@ -19,11 +19,6 @@ CREATE TABLE otp.itineraries (
     itinerary_id UUID PRIMARY KEY
 );
 
-CREATE TABLE otp.users (
-    user_id SERIAL PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL
-);
-
 CREATE TABLE otp.user_cart (
     user_cart_id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
@@ -32,31 +27,6 @@ CREATE TABLE otp.user_cart (
     depart_date TEXT NOT NULL,
     return_date TEXT,
     count_travellers TEXT NOT NULL
-);
-
-CREATE TABLE otp.travelers (
-    traveler_id SERIAL PRIMARY KEY,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    address TEXT,
-    email TEXT UNIQUE NOT NULL,
-    phone INT
-);
-
-CREATE TABLE otp.orders (
-    order_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES otp.users (user_id) NOT NULL,
-    status TEXT NOT NULL,
-    created_time DATE NOT NULL,
-    update_time DATE NOT NULL
-);
-
-CREATE TABLE otp.tickets (
-    ticket_id SERIAL PRIMARY KEY,
-    traveler_id INT REFERENCES otp.travelers (traveler_id) NOT NULL,
-    order_id INT REFERENCES otp.orders (order_id) NOT NULL,
-    itinerary_id UUID REFERENCES otp.itineraries (itinerary_id) NOT NULL,
-    price DOUBLE PRECISION NOT NULL
 );
 
 CREATE TABLE otp.legs (
